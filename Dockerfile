@@ -4,7 +4,12 @@ MAINTAINER Mikaël Gibert <mikael.gibert@gmail.com>
 RUN apt-get update
 RUN apt-get install -y collectd
 
-ADD ./collectd.conf /etc/collectd/collectd.conf
-EXPOSE 25826
+ENV COLLECTD_HOST localhost
+ENV COLLECTD_PORT 25826
+ENV STATSD_PORT 8125
 
-RUN /etc/init.d/collectd start
+ADD ./collectd.conf /etc/collectd/collectd.conf
+ADD run.sh /run.sh
+
+EXPOSE ${STATSD_PORT}
+RUN ["/run.sh"]
