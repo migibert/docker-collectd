@@ -1,8 +1,7 @@
 FROM ubuntu:trusty
 MAINTAINER Mikaël Gibert <mikael.gibert@gmail.com>
 
-RUN apt-get update
-RUN apt-get install -y collectd
+RUN apt-get update && apt-get install -y collectd
 
 ENV COLLECTD_HOST localhost
 ENV COLLECTD_PORT 25826
